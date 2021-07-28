@@ -60,5 +60,5 @@ GeoTestDatabase >> nextId [
 { #category : #writing }
 GeoTestDatabase >> write: aSTONString [
 
-	"file := file , aSTONString , Character null asString"
+	file := file , aSTONString , Character null asString
 ]
