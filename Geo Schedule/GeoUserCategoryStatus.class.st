@@ -9,6 +9,12 @@ Class {
 	#category : #'Geo Schedule'
 }
 
+{ #category : #testing }
+GeoUserCategoryStatus >> canView [
+	
+	^status = 'view' or: [ status = 'admin' ]
+]
+
 { #category : #accessing }
 GeoUserCategoryStatus >> category [
 

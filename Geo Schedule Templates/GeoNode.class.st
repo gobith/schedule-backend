@@ -33,6 +33,12 @@ GeoNode >> initialize [
 	children := SortedCollection sortBlock: [ :a :b | a <= b ]
 ]
 
+{ #category : #printing }
+GeoNode >> printOn: aStream [
+
+	aStream print: timespan
+]
+
 { #category : #accessing }
 GeoNode >> timespan [
 

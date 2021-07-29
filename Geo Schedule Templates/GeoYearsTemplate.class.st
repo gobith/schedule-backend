@@ -3,7 +3,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'years',
-		'category'
+		'category',
+		'users',
+		'eventUsers'
 	],
 	#category : #'Geo Schedule Templates'
 }
@@ -14,16 +16,27 @@ GeoYearsTemplate class >> category: aCategory schedule: aSchedule [
 	^self new category: aCategory schedule: aSchedule
 ]
 
-{ #category : #accessing }
-GeoYearsTemplate >> addDay: aDate events: eventCollection to: aCollection [ 
-	
+{ #category : #private }
+GeoYearsTemplate >> addDay: aDate events: eventCollection to: aCollection [
+
 	| day |
 	day := GeoDay new timespan: aDate.
 	aCollection add: day.
-	eventCollection do: [ : event | day children add: event ]
+	eventCollection do: [ :event | self addEvent: event to: day children ]
 ]
 
-{ #category : #accessing }
+{ #category : #private }
+GeoYearsTemplate >> addEvent: anEvent to: aCollection [ 
+	
+	| eventUsr |
+	eventUsr := GeoEventUsers new event: anEvent.
+	aCollection add: eventUsr.
+	eventUsr template: self.
+	
+	eventUsers at: anEvent id put: eventUsr
+]
+
+{ #category : #private }
 GeoYearsTemplate >> addMonth: aMonth events: eventCollection to: aCollection [
 
 	| month |
@@ -34,14 +47,14 @@ GeoYearsTemplate >> addMonth: aMonth events: eventCollection to: aCollection [
 			self addDay: day events: eventsPerDay to: month children ]
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 GeoYearsTemplate >> addYear: aYear events: eventCollection [
 
 	 
 	
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 GeoYearsTemplate >> addYear: aYear events: eventCollection to: aCollection [
 
 	| year |
@@ -57,10 +70,22 @@ GeoYearsTemplate >> category: aCategory schedule: aSchedule [
 
 	| events |
 	category := aCategory.
-	years := SortedCollection sortBlock: [ :a :b | a < b ].
+	eventUsers := Dictionary new.
+
+	users := (aSchedule users select: [ :user | 
+		          user canViewCategory: aCategory ]) asSortedCollection: [ 
+		         :userA 
+		         :userB | userA name <= userB name ].
+
+	years := SortedCollection sortBlock: [ :a :b | a <= b ].
 	events := aSchedule events asOrderedCollection select: [ :each | 
 		          each category = aCategory ].
 	(events partition: [ :event | event dateAndTime asYear ]) 
 		keysAndValuesDo: [ :year :eventsPerYear | 
-		self addYear: year events: eventsPerYear to: years ]
+			self addYear: year events: eventsPerYear to: years ]
+]
+
+{ #category : #accessing }
+GeoYearsTemplate >> users [
+	^ users
 ]

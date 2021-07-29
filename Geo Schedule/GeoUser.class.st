@@ -16,6 +16,16 @@ Class {
 	#category : #'Geo Schedule'
 }
 
+{ #category : #testing }
+GeoUser >> canViewCategory: aGeoCategory [
+
+	self isActive ifFalse: [ ^false ].
+	^ categoryStatus
+		  at: aGeoCategory id
+		  ifPresent: [ :catStatus | catStatus canView ]
+		  ifAbsent: [ false ]
+]
+
 { #category : #accessing }
 GeoUser >> categoryStatus [
 
@@ -57,6 +67,11 @@ GeoUser >> initialize [
 	super initialize.
 	eventStatus := Dictionary new.
 	categoryStatus := Dictionary new
+]
+
+{ #category : #testing }
+GeoUser >> isActive [ 
+	^role = 'normal'
 ]
 
 { #category : #accessing }

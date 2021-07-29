@@ -127,6 +127,15 @@ GeoEvent >> status: anObject [
 ]
 
 { #category : #accessing }
+GeoEvent >> statusForUser: aUser [
+
+	^ userStatus
+		  at: aUser id
+		  ifPresent: [ :userSts | userSts status ]
+		  ifAbsent: [ 'neutral' ]
+]
+
+{ #category : #accessing }
 GeoEvent >> userStatus [
 	^ userStatus
 ]
