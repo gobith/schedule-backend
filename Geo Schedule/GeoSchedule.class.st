@@ -13,7 +13,7 @@ Class {
 { #category : #actions }
 GeoSchedule >> addCategory: aDictionary [
 
-	GeoAddCategory fromPayload: aDictionary schedule: self
+	^GeoAddCategory fromPayload: aDictionary schedule: self
 ]
 
 { #category : #actions }

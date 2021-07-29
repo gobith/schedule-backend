@@ -8,7 +8,6 @@ Class {
 GeoAddUser >> addTo: aSchedule [
 
 	| user |
-	payload at: 'id' put: aSchedule nextId.
 	user := GeoUser new.
 	user
 		id: (payload at: 'id').
@@ -21,4 +20,10 @@ GeoAddUser >> addTo: aSchedule [
 	payload at: 'websiteRole' ifPresent: [ :websiteRole | user websiteRole: websiteRole ] ifAbsent: [user websiteRole: 'normal'].
 	aSchedule users at: user id put: user.
 	^user
+]
+
+{ #category : #actions }
+GeoAddUser >> privateFrom: aSchedule [
+
+	self addIdentityFrom: aSchedule
 ]

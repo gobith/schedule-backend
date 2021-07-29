@@ -15,12 +15,28 @@ GeoAction class >> fromPayload: aDictionary schedule: aSchedule [
 	^self new fromPayload: aDictionary schedule: aSchedule
 ]
 
+{ #category : #private }
+GeoAction >> addIdentityFrom: aSchedule [
+
+	payload at: 'id' put: aSchedule nextId
+]
+
+{ #category : #actions }
+GeoAction >> addTo: aSchedule [
+
+	self subclassResponsibility 
+]
+
 { #category : #initialization }
 GeoAction >> fromPayload: aDictionary schedule: aSchedule [
 
 	modDateAndTime := aSchedule modDateAndTime.
 	payload := aDictionary.
-	
+	self privateFrom: aSchedule.
 	aSchedule database store: self.
-	^self addTo: aSchedule.
+	^ self addTo: aSchedule
+]
+
+{ #category : #actions }
+GeoAction >> privateFrom: aSchedule [
 ]

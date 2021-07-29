@@ -4,11 +4,10 @@ Class {
 	#category : #'Geo Schedule Actions'
 }
 
-{ #category : #adding }
+{ #category : #actions }
 GeoAddEvent >> addTo: aSchedule [
 
 	| event |
-	payload at: 'id' put: aSchedule nextId.
 	event := GeoEvent new.
 	event
 		id: (payload at: 'id');
@@ -19,4 +18,10 @@ GeoAddEvent >> addTo: aSchedule [
 		nrOfUsers: (payload at: 'nrOfUsers');
 		location: (payload at: 'location').
 	aSchedule events at: event id put: event
+]
+
+{ #category : #actions }
+GeoAddEvent >> privateFrom: aSchedule [
+
+	self addIdentityFrom: aSchedule
 ]
