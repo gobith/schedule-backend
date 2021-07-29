@@ -21,6 +21,8 @@ GeoScheduleServer >> portNumber [
 
 { #category : #'accessing requests' }
 GeoScheduleServer >> request_years: aRequest [ 
+
+	^schedule templateAtCategory: (schedule categoryNamed: 'Oud Papier') typeClass: GeoYearsTemplate
 ]
 
 { #category : #accessing }
