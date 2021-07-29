@@ -129,6 +129,12 @@ GeoSchedule >> updateEventStatus: aDictionary [
 ]
 
 { #category : #actions }
+GeoSchedule >> updateUserCategoryStatus: aDictionary [
+
+	^GeoUpdateUserCategoryStatus fromPayload: aDictionary schedule: self
+]
+
+{ #category : #actions }
 GeoSchedule >> updateUserEventStatus: aDictionary [
 
 	^GeoUpdateUserEventStatus fromPayload: aDictionary schedule: self

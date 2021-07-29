@@ -10,10 +10,17 @@ Class {
 		'password',
 		'role',
 		'websiteRole',
-		'eventStatus'
+		'eventStatus',
+		'categoryStatus'
 	],
 	#category : #'Geo Schedule'
 }
+
+{ #category : #accessing }
+GeoUser >> categoryStatus [
+
+	^categoryStatus
+]
 
 { #category : #accessing }
 GeoUser >> email [
@@ -48,7 +55,8 @@ GeoUser >> id: anObject [
 GeoUser >> initialize [ 
 
 	super initialize.
-	eventStatus := Dictionary new
+	eventStatus := Dictionary new.
+	categoryStatus := Dictionary new
 ]
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Class {
 	#category : #'Geo Schedule Actions'
 }
 
-{ #category : #adding }
+{ #category : #actions }
 GeoUpdateUserEventStatus >> addTo: aSchedule [
 
 	| user event status userEventStatus |

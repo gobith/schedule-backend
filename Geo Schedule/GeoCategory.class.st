@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'name',
-		'description'
+		'description',
+		'userStatus'
 	],
 	#category : #'Geo Schedule'
 }
@@ -33,6 +34,13 @@ GeoCategory >> id: anObject [
 	id := anObject
 ]
 
+{ #category : #initialization }
+GeoCategory >> initialize [ 
+
+	super initialize.
+	userStatus := Dictionary new
+]
+
 { #category : #accessing }
 GeoCategory >> name [
 
@@ -50,4 +58,10 @@ GeoCategory >> printOn: aStream [
 
 	aStream
 		nextPutAll: name
+]
+
+{ #category : #accessing }
+GeoCategory >> userStatus [
+
+	^userStatus
 ]
