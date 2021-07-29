@@ -14,6 +14,18 @@ Class {
 	#category : #'Geo Schedule'
 }
 
+{ #category : #comparing }
+GeoEvent >> < anEvent [
+
+	^dateAndTime < anEvent dateAndTime
+]
+
+{ #category : #comparing }
+GeoEvent >> <= anEvent [
+
+	^dateAndTime <= anEvent dateAndTime
+]
+
 { #category : #accessing }
 GeoEvent >> category [
 

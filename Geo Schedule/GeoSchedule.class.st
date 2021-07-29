@@ -5,7 +5,8 @@ Class {
 		'events',
 		'users',
 		'categories',
-		'database'
+		'database',
+		'templates'
 	],
 	#category : #'Geo Schedule'
 }
@@ -32,6 +33,14 @@ GeoSchedule >> addUser: aDictionary [
 GeoSchedule >> categories [
 
 	^ categories
+]
+
+{ #category : #accessing }
+GeoSchedule >> categoryNamed: categoryName [
+
+	^ categories
+		  detect: [ :each | each name = categoryName ]
+		  ifNone: [ nil ]
 ]
 
 { #category : #accessing }
@@ -65,6 +74,7 @@ GeoSchedule >> initialize [
 	users := Dictionary new.
 	categories := Dictionary new.
 	database := GeoExternalFileDatabase new.
+	templates := Dictionary new
 	
 ]
 
@@ -96,6 +106,20 @@ GeoSchedule >> modifyUser: aDictionary [
 GeoSchedule >> nextId [
 
 	^database nextId
+]
+
+{ #category : #accessing }
+GeoSchedule >> templateAtCategory: aCategory typeClass: templateType [
+
+	^ (self templates at: aCategory ifAbsentPut: [ Dictionary new ])
+		  at: templateType
+		  ifAbsentPut: [ templateType category: aCategory schedule: self ]
+]
+
+{ #category : #accessing }
+GeoSchedule >> templates [
+	templates ifNil: [ templates := Dictionary new ].
+	^templates
 ]
 
 { #category : #actions }
