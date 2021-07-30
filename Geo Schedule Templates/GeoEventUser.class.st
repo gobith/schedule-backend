@@ -1,5 +1,5 @@
 Class {
-	#name : #GeoUserStatus,
+	#name : #GeoEventUser,
 	#superclass : #Object,
 	#instVars : [
 		'user',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #accessing }
-GeoUserStatus class >> neoJsonMappingOn: mapping [
+GeoEventUser class >> neoJsonMappingOn: mapping [
 
 	mapping
 		mapAccessor: #userId to: #user;
@@ -17,31 +17,31 @@ GeoUserStatus class >> neoJsonMappingOn: mapping [
 ]
 
 { #category : #accessing }
-GeoUserStatus >> status [
+GeoEventUser >> status [
 
 	^ status
 ]
 
 { #category : #accessing }
-GeoUserStatus >> status: anObject [
+GeoEventUser >> status: anObject [
 
 	status := anObject
 ]
 
 { #category : #accessing }
-GeoUserStatus >> user [
+GeoEventUser >> user [
 
 	^ user
 ]
 
 { #category : #accessing }
-GeoUserStatus >> user: anObject [
+GeoEventUser >> user: anObject [
 
 	user := anObject
 ]
 
 { #category : #accessing }
-GeoUserStatus >> userId [
+GeoEventUser >> userId [
 
 	^user id
 ]
