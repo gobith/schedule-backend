@@ -8,6 +8,14 @@ Class {
 	#category : #'Geo Schedule Templates'
 }
 
+{ #category : #accessing }
+GeoNode class >> neoJsonMappingOn: mapping [
+
+	mapping
+		mapAccessor: #name;
+		mapInstVar: #children
+]
+
 { #category : #comparing }
 GeoNode >> < aNode [
 
@@ -31,6 +39,12 @@ GeoNode >> initialize [
 
 	super initialize.
 	children := SortedCollection sortBlock: [ :a :b | a <= b ]
+]
+
+{ #category : #accessing }
+GeoNode >> name [
+
+	self subclassResponsibility 
 ]
 
 { #category : #printing }

@@ -9,10 +9,26 @@ Class {
 	#category : #'Geo Schedule Templates'
 }
 
+{ #category : #accessing }
+GeoEventUsers class >> neoJsonMappingOn: mapping [
+
+	mapping
+		mapAccessor: #name;
+		mapAccessor: #dateAndTimeString to: #dateAndTime;
+		mapAccessor: #status;
+		mapAccessor: #userStatus
+]
+
 { #category : #comparing }
 GeoEventUsers >> <= anEventUsers [
 
 	^event dateAndTime <= anEventUsers event dateAndTime
+]
+
+{ #category : #accessing }
+GeoEventUsers >> dateAndTimeString [
+
+	^event dateAndTime asStringYMDHM
 ]
 
 { #category : #accessing }
@@ -27,6 +43,12 @@ GeoEventUsers >> event: anObject [
 	event := anObject
 ]
 
+{ #category : #accessing }
+GeoEventUsers >> name [
+
+	^ event dateAndTime asTime hh_colon_mm_24
+]
+
 { #category : #printing }
 GeoEventUsers >> printOn: aStream [
 
@@ -37,6 +59,12 @@ GeoEventUsers >> printOn: aStream [
 GeoEventUsers >> resetUserStatus [
 
 	userStatus := nil
+]
+
+{ #category : #accessing }
+GeoEventUsers >> status [
+
+	^event status
 ]
 
 { #category : #accessing }

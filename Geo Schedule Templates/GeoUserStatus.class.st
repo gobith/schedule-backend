@@ -9,6 +9,14 @@ Class {
 }
 
 { #category : #accessing }
+GeoUserStatus class >> neoJsonMappingOn: mapping [
+
+	mapping
+		mapAccessor: #userId to: #user;
+		mapAccessor: #status
+]
+
+{ #category : #accessing }
 GeoUserStatus >> status [
 
 	^ status
@@ -30,4 +38,10 @@ GeoUserStatus >> user [
 GeoUserStatus >> user: anObject [
 
 	user := anObject
+]
+
+{ #category : #accessing }
+GeoUserStatus >> userId [
+
+	^user id
 ]
