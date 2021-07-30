@@ -2,8 +2,10 @@ Class {
 	#name : #GeoEventUser,
 	#superclass : #Object,
 	#instVars : [
+		'event',
 		'user',
-		'status'
+		'status',
+		'color'
 	],
 	#category : #'Geo Schedule Templates'
 }
@@ -13,7 +15,30 @@ GeoEventUser class >> neoJsonMappingOn: mapping [
 
 	mapping
 		mapAccessor: #userId to: #user;
-		mapAccessor: #status
+		mapAccessor: #status;
+		mapAccessor: #color
+]
+
+{ #category : #accessing }
+GeoEventUser >> color [
+
+	color ifNil: [ 
+		color := (GeoStatusModel
+			         colorForEventStatus: event status
+			         userStatus: status) asHexString ].
+	^ color
+]
+
+{ #category : #accessing }
+GeoEventUser >> event [
+
+	^ event
+]
+
+{ #category : #accessing }
+GeoEventUser >> event: anObject [
+
+	event := anObject
 ]
 
 { #category : #accessing }

@@ -86,6 +86,7 @@ GeoEventUsers >> userStatus [
 		userStatus := template users collect: [ :user | 
 			              GeoEventUser new
 				              user: user;
+										event: event;
 				              status: (event statusForUser: user);
 				              yourself ] ].
 	^ userStatus

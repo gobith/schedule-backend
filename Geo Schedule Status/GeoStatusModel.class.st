@@ -36,6 +36,18 @@ GeoStatusModel class >> closed [
 		  yourself
 ]
 
+{ #category : #accessing }
+GeoStatusModel class >> colorForEventStatus: eventStatusSymbol userStatus: userStatusSymbol [
+
+	| eventStatus userStatusColor |
+	eventStatus := self statusDict at: eventStatusSymbol.
+	userStatusColor := self statusDict
+		                   at: userStatusSymbol
+		                   ifPresent: [ :userStatus | userStatus color ]
+		                   ifAbsent: [ Color white ].
+	^ eventStatus filteredColorFor: userStatusColor
+]
+
 { #category : #'accessing-user' }
 GeoStatusModel class >> confirmed [
 
@@ -43,6 +55,17 @@ GeoStatusModel class >> confirmed [
 		  symbol: 'confirmedScheduling';
 		  name: 'Bevestigd';
 			menuName: 'Bevestigen';
+		  color: Color blue darker;
+		  yourself
+]
+
+{ #category : #'accessing-user' }
+GeoStatusModel class >> confirmedDriver [
+
+	^ GeoUserStatus new
+		  symbol: 'confirmedSchedulingDriver';
+		  name: 'Bevestigd Chauffeur';
+			menuName: 'Bevestigen Chauffeur';
 		  color: Color blue darker;
 		  yourself
 ]
@@ -132,7 +155,8 @@ GeoStatusModel class >> statusDict [
 			self iCan.
 			self iCanNot.
 			self neutral.
-			self scheduled } do: [ :status | 
+			self scheduled .
+			self confirmedDriver } do: [ :status | 
 			statusDict at: status symbol put: status ] ].
 	^ statusDict
 ]
