@@ -51,6 +51,11 @@ GeoEvent >> dateAndTime: anObject [
 ]
 
 { #category : #accessing }
+GeoEvent >> dateAndTimeString [
+	^dateAndTime asStringYMDHM
+]
+
+{ #category : #accessing }
 GeoEvent >> description [
 
 	^ description
@@ -79,6 +84,12 @@ GeoEvent >> initialize [
 
 	super initialize.
 	userStatus := Dictionary new
+]
+
+{ #category : #testing }
+GeoEvent >> isActive [
+	
+	^status ~= 'archived'
 ]
 
 { #category : #accessing }

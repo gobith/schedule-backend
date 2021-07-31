@@ -141,6 +141,12 @@ GeoSchedule >> updateUserEventStatus: aDictionary [
 ]
 
 { #category : #accessing }
+GeoSchedule >> userNamed: userName [
+
+	^users detect: [ :user | user name = userName ] ifNone: [ nil ]
+]
+
+{ #category : #accessing }
 GeoSchedule >> users [
 
 	^ users

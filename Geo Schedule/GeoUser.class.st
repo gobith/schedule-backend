@@ -26,6 +26,33 @@ GeoUser >> canViewCategory: aGeoCategory [
 		  ifAbsent: [ false ]
 ]
 
+{ #category : #testing }
+GeoUser >> canViewEvent: anEvent [
+
+	^anEvent isActive and: [(self canViewCategory: anEvent category)]
+]
+
+{ #category : #testing }
+GeoUser >> canViewUser: aUser [
+
+	self isAdmin ifTrue: [ ^ true ].
+
+	^self categoryStatus anySatisfy: [ :myCategoryStatus | 
+		myCategoryStatus canView and: [ 
+			aUser categoryStatus
+				at: myCategoryStatus category id
+				ifPresent: [ :otherCategoryStatus | otherCategoryStatus canView ]
+				ifAbsent: [ false ] ] ]
+]
+
+{ #category : #accessing }
+GeoUser >> capabilitiesFor: aSchedule [
+
+	^ (self isAdmin
+		   ifTrue: [ GeoAdminCapabilities ]
+		   ifFalse: [ GeoUserCapabilities ]) schedule: aSchedule user: self
+]
+
 { #category : #accessing }
 GeoUser >> categoryStatus [
 
@@ -72,6 +99,12 @@ GeoUser >> initialize [
 { #category : #testing }
 GeoUser >> isActive [ 
 	^role = 'normal'
+]
+
+{ #category : #testing }
+GeoUser >> isAdmin [
+	
+	^websiteRole = 'admin'
 ]
 
 { #category : #accessing }

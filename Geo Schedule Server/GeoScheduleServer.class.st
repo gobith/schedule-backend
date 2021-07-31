@@ -11,12 +11,27 @@ Class {
 { #category : #accessing }
 GeoScheduleServer >> addRoutes [
 
-	teapot GET: '/years' -> [ :request | self request_years: request ]
+	teapot GET: '/years' -> [ :request | self request_years: request ].
+	teapot GET: '/schedule/<admin>' -> [ :request | self requestSchedule: request ].
+	
 ]
 
 { #category : #accessing }
 GeoScheduleServer >> portNumber [
 	^ 8100
+]
+
+{ #category : #accessing }
+GeoScheduleServer >> requestSchedule: aRequest [
+
+	| isAdmin user |
+	isAdmin := (aRequest at: #admin) = 'true'.
+
+	user := isAdmin
+		        ifTrue: [ schedule userNamed: 'Georges Kerssies' ]
+		        ifFalse: [ schedule userNamed: 'Joost Kuiper' ].
+		
+	^(user capabilitiesFor: schedule) scheduleObjects
 ]
 
 { #category : #'accessing requests' }
