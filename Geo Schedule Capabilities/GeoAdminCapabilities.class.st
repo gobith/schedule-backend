@@ -60,7 +60,8 @@ GeoAdminCapabilities >> userObjectFor: aUser [
 GeoAdminCapabilities >> users [
 
 	| users |
-	users := schedule users asOrderedCollection.
+	users := schedule users asSortedCollection: [ :userA :userB | 
+		         userA name <= userB name ].
 
-	^ users collect: [ : each | self userObjectFor: each ]
+	^ users collect: [ :each | self userObjectFor: each ]
 ]

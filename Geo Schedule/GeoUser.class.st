@@ -36,7 +36,7 @@ GeoUser >> canViewEvent: anEvent [
 GeoUser >> canViewUser: aUser [
 
 	self isAdmin ifTrue: [ ^ true ].
-
+	aUser isArchived ifTrue: [ ^false ].
 	^self categoryStatus anySatisfy: [ :myCategoryStatus | 
 		myCategoryStatus canView and: [ 
 			aUser categoryStatus
@@ -105,6 +105,11 @@ GeoUser >> isActive [
 GeoUser >> isAdmin [
 	
 	^websiteRole = 'admin'
+]
+
+{ #category : #testing }
+GeoUser >> isArchived [
+	^role = 'archive' 
 ]
 
 { #category : #accessing }

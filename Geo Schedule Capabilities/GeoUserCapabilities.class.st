@@ -50,7 +50,10 @@ GeoUserCapabilities >> userObjectFor: aUser [
 GeoUserCapabilities >> users [
 
 	| users |
-	users := schedule users asOrderedCollection select: [: each | user canViewUser: each].
+	users := (schedule users asOrderedCollection select: [ :each | 
+		          user canViewUser: each ]) asSortedCollection: [ 
+		         :userA 
+		         :userB | userA name <= userB name ].
 
-	^ users collect: [ : each | self userObjectFor: each ]
+	^ users collect: [ :each | self userObjectFor: each ]
 ]
