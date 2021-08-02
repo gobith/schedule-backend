@@ -8,11 +8,23 @@ Class {
 GeoUserCapabilities >> events [
 
 	| events |
-	events := schedule events asOrderedCollection select: [ :event | user canViewEvent: event ].
+	events := schedule events asOrderedCollection select: [ :event | 
+		          user canViewEvent: event ].
 
-	^events collect: [ :event | 
-		  | dict |
+	^ events collect: [ :event | 
+		  | dict userStatus |
 		  dict := OrderedDictionary new.
+
+		  userStatus := (event userStatus asOrderedCollection select: [ :us | 
+			                 us user canViewCategory: event category ]) 
+			                collect: [ :each | 
+				                | userStatusDict |
+				                userStatusDict := OrderedDictionary new.
+				                userStatusDict
+					                at: 'user' put: each user id;
+					                at: 'status' put: each status.
+				                userStatusDict ].
+
 		  dict
 			  at: 'id' put: event id;
 			  at: 'dateAndTime' put: event dateAndTimeString;
@@ -20,29 +32,20 @@ GeoUserCapabilities >> events [
 			  at: 'description' put: event description;
 			  at: 'category' put: event category id;
 			  at: 'nrOfUsers' put: event nrOfUsers;
-			  at: 'location' put: event location.
+			  at: 'location' put: event location;
+			  at: 'userStatus' put: userStatus.
 		  dict ]
 ]
 
 { #category : #accessing }
 GeoUserCapabilities >> userObjectFor: aUser [
 
-	| dict eventStatus  |
-	eventStatus := (aUser eventStatus asOrderedCollection select: [ :es | 
-		                user canViewCategory: es event category ]) collect: [ 
-		               :each | 
-		               | eventStatusDict |
-		               eventStatusDict := OrderedDictionary new.
-		               eventStatusDict
-			               at: 'event' put: each event id;
-			               at: 'status' put: each status.
-		               eventStatusDict ].
+	| dict |
 	dict := OrderedDictionary new.
 	dict
 		at: 'id' put: aUser id;
 		at: 'name' put: aUser name;
-		at: 'surname' put: aUser surname;
-		at: 'eventStatus' put: eventStatus.
+		at: 'surname' put: aUser surname.
 	^ dict
 ]
 
