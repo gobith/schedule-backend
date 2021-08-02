@@ -1,6 +1,6 @@
 Extension { #name : #Time }
 
-{ #category : #'*Geo Schedule' }
+{ #category : #'*Geo Schedule Domain' }
 Time >> hh_colon_mm_24 [
  	"Return a string of the form 1123 (for 11:23 am), 2154 (for 9:54 pm), of exactly 4 digits"
  

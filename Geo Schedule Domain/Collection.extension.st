@@ -1,6 +1,6 @@
 Extension { #name : #Collection }
 
-{ #category : #'*Geo Schedule' }
+{ #category : #'*Geo Schedule Domain' }
 Collection >> partition: aBlock [ 
 
 	"(OrderedCollection with: 1->2 with: 2->3 with: 3->4 with: 1->5) partition: #key"

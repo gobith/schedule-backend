@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'actions'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #accessing }

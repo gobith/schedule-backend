@@ -7,7 +7,7 @@ Class {
 		'description',
 		'userStatus'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #accessing }

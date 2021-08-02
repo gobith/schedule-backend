@@ -6,7 +6,7 @@ Class {
 		'category',
 		'status'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #testing }

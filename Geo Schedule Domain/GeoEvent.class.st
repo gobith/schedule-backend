@@ -11,7 +11,7 @@ Class {
 		'location',
 		'userStatus'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #comparing }

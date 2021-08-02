@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'mutex'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #acccessing }

@@ -13,7 +13,7 @@ Class {
 		'eventStatus',
 		'categoryStatus'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #testing }

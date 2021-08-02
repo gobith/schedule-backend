@@ -6,7 +6,7 @@ Class {
 		'event',
 		'status'
 	],
-	#category : #'Geo Schedule'
+	#category : #'Geo Schedule Domain'
 }
 
 { #category : #accessing }
