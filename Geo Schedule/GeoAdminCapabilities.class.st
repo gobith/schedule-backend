@@ -35,6 +35,17 @@ GeoAdminCapabilities >> events [
 ]
 
 { #category : #accessing }
+GeoAdminCapabilities >> modifyUser: aRequest [
+
+	| dict |
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	user := schedule modifyUser: dict.
+	
+	^self userObjectFor: user
+]
+
+{ #category : #accessing }
 GeoAdminCapabilities >> userObjectFor: aUser [
 
 	| dict categoryStatus |
