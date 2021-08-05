@@ -5,36 +5,33 @@ Class {
 }
 
 { #category : #accessing }
-GeoAdminCapabilities >> events [
+GeoAdminCapabilities >> eventObjectFor: event [
 
-	| events |
-	events := schedule events asOrderedCollection.
-	^ events collect: [ :event | 
-		  | dict userStatus |
-		  dict := OrderedDictionary new.
-
-		  userStatus := event userStatus asOrderedCollection collect: [ 
-			                :each | 
-			                | userStatusDict |
-			                userStatusDict := OrderedDictionary new.
-			                userStatusDict
-				                at: 'user' put: each user id;
-				                at: 'status' put: each status.
-			                userStatusDict ].
-
-		  dict
-			  at: 'id' put: event id;
-			  at: 'dateAndTime' put: event dateAndTimeString;
-			  at: 'status' put: event status;
-			  at: 'description' put: event description;
-			  at: 'category' put: event category id;
-			  at: 'nrOfUsers' put: event nrOfUsers;
-			  at: 'location' put: event location;
-			  at: 'userStatus' put: userStatus.
-		  dict ]
+	^ self newJSONObject
+		  id: event id;
+		  dateAndTime: event dateAndTimeString;
+		  status: event status;
+		  description: event description;
+		  category: event category id;
+		  nrOfUsers: event nrOfUsers;
+		  location: event location;
+		  userStatus:
+			  (event userStatus asOrderedCollection collect: [ :each | 
+					   self newJSONObject
+						   user: each user id;
+						   status: each status;
+						   yourself ]);
+		  yourself
 ]
 
 { #category : #accessing }
+GeoAdminCapabilities >> events [
+
+	^ schedule events asOrderedCollection 
+			collect: [ :event | self eventObjectFor: event ]
+]
+
+{ #category : #'accessing requests' }
 GeoAdminCapabilities >> modifyUser: aRequest [
 
 	| dict |
@@ -48,34 +45,27 @@ GeoAdminCapabilities >> modifyUser: aRequest [
 { #category : #accessing }
 GeoAdminCapabilities >> userObjectFor: aUser [
 
-	| dict categoryStatus |
-	categoryStatus := aUser categoryStatus asOrderedCollection collect: [ 
-		                  :each | 
-		                  | categoryStatusDict |
-		                  categoryStatusDict := OrderedDictionary new.
-		                  categoryStatusDict
-			                  at: 'category' put: each category id;
-			                  at: 'status' put: each status.
-		                  categoryStatusDict ].
-	dict := OrderedDictionary new.
-	dict
-		at: 'id' put: aUser id;
-		at: 'name' put: aUser name;
-		at: 'surname' put: aUser surname;
-		at: 'email' put: aUser email;
-		at: 'phone' put: aUser phone;
-		at: 'role' put: aUser role;
-		at: 'websiteRole' put: aUser websiteRole;
-		at: 'categoryStatus' put: categoryStatus.
-	^ dict
+	^ self newJSONObject
+		  id: aUser id;
+		  name: aUser name;
+		  surname: aUser surname;
+		  email: aUser email;
+		  phone: aUser phone;
+		  role: aUser role;
+		  websiteRole: aUser websiteRole;
+		  categoryStatus:
+			  (aUser categoryStatus asOrderedCollection collect: [ :each | 
+					   self newJSONObject
+						   category: each category id;
+						   status: each status;
+						   yourself ]);
+		  yourself
 ]
 
 { #category : #accessing }
 GeoAdminCapabilities >> users [
 
-	| users |
-	users := schedule users asSortedCollection: [ :userA :userB | 
-		         userA name <= userB name ].
-
-	^ users collect: [ :each | self userObjectFor: each ]
+	^ (schedule users 
+		asSortedCollection: [ :userA :userB | userA name <= userB name ]) 
+		collect: [ :each | self userObjectFor: each ]
 ]

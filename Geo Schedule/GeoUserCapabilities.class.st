@@ -5,48 +5,44 @@ Class {
 }
 
 { #category : #accessing }
+GeoUserCapabilities >> eventObjectFor: event [
+
+	^ self newJSONObject
+		  id: event id;
+		  dateAndTime: event dateAndTimeString;
+		  status: event status;
+		  description: event description;
+		  category: event category id;
+		  nrOfUsers: event nrOfUsers;
+		  location: event location;
+		  userStatus:
+			  ((event userStatus asOrderedCollection select: [ :us | 
+					    us user canViewCategory: event category ]) collect: [ :each | 
+					   self newJSONObject
+						   user: each user id;
+						   status: each status;
+						   yourself ]);
+		  yourself
+]
+
+{ #category : #accessing }
 GeoUserCapabilities >> events [
 
 	| events |
 	events := schedule events asOrderedCollection select: [ :event | 
 		          user canViewEvent: event ].
 
-	^ events collect: [ :event | 
-		  | dict userStatus |
-		  dict := OrderedDictionary new.
-
-		  userStatus := (event userStatus asOrderedCollection select: [ :us | 
-			                 us user canViewCategory: event category ]) 
-			                collect: [ :each | 
-				                | userStatusDict |
-				                userStatusDict := OrderedDictionary new.
-				                userStatusDict
-					                at: 'user' put: each user id;
-					                at: 'status' put: each status.
-				                userStatusDict ].
-
-		  dict
-			  at: 'id' put: event id;
-			  at: 'dateAndTime' put: event dateAndTimeString;
-			  at: 'status' put: event status;
-			  at: 'description' put: event description;
-			  at: 'category' put: event category id;
-			  at: 'nrOfUsers' put: event nrOfUsers;
-			  at: 'location' put: event location;
-			  at: 'userStatus' put: userStatus.
-		  dict ]
+	^ events collect: [ :event | self eventObjectFor: event ]
 ]
 
 { #category : #accessing }
 GeoUserCapabilities >> userObjectFor: aUser [
 
-	| dict |
-	dict := OrderedDictionary new.
-	dict
-		at: 'id' put: aUser id;
-		at: 'name' put: aUser name;
-		at: 'surname' put: aUser surname.
-	^ dict
+	^ self newJSONObject
+		  id: aUser id;
+		  name: aUser name;
+		  surname: aUser surname;
+		  yourself
 ]
 
 { #category : #accessing }

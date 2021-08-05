@@ -14,6 +14,18 @@ GeoCapabilities class >> schedule: aSchedule user: aUser [
 	^self new schedule: aSchedule user: aUser
 ]
 
+{ #category : #accessing }
+GeoCapabilities >> events [
+
+	^self subclassResponsibility 
+]
+
+{ #category : #accessing }
+GeoCapabilities >> newJSONObject [
+
+	^GeoJSONObject new
+]
+
 { #category : #initialization }
 GeoCapabilities >> schedule: aSchedule user: aUser [
 
@@ -24,12 +36,14 @@ GeoCapabilities >> schedule: aSchedule user: aUser [
 { #category : #accessing }
 GeoCapabilities >> scheduleObjects [
 
-	| dict |
-	dict := Dictionary new.
+	^ self newJSONObject
+		  events: self events;
+		  users: self users;
+		  yourself
+]
 
-	dict
-		at: 'events' put: self events;
-		at: 'users' put: self users.
+{ #category : #accessing }
+GeoCapabilities >> users [
 
-	^ dict
+	^self subclassResponsibility 
 ]
