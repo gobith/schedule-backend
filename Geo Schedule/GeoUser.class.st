@@ -46,6 +46,11 @@ GeoUser >> canViewUser: aUser [
 ]
 
 { #category : #accessing }
+GeoUser >> capabilitiesClass [
+	self shouldBeImplemented.
+]
+
+{ #category : #accessing }
 GeoUser >> capabilitiesFor: aSchedule [
 
 	^ (self isAdmin

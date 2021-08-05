@@ -34,7 +34,7 @@ GeoCapabilities >> schedule: aSchedule user: aUser [
 ]
 
 { #category : #accessing }
-GeoCapabilities >> scheduleObjects [
+GeoCapabilities >> scheduleObject [
 
 	^ self newJSONObject
 		  events: self events;

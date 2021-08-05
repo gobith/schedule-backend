@@ -7,11 +7,11 @@ Class {
 { #category : #accessing }
 GeoNoCapabilities >> events [
 
-	^self newJSONObject
+	^#()
 ]
 
 { #category : #accessing }
 GeoNoCapabilities >> users [
 
-	^self newJSONObject
+	^#()
 ]
