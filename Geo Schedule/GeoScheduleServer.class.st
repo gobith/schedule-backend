@@ -20,6 +20,7 @@ GeoScheduleServer >> addRoutes [
 
 	teapot GET: '/schedule/contents' -> [ :request | self requestSchedule: request ].
 	teapot GET: '/schedule/login' -> [ :request | self login: request ].
+	teapot GET: '/schedule/logout' -> [ :request | self logout: request ].
 	teapot PUT: '/schedule/category/add' -> [ :request | self addCategory: request ].
 	teapot PUT: '/schedule/category/modify' -> [ :request | self modifyCategory: request ].
 	teapot PUT: '/schedule/user/add' -> [ :request | self addUser: request ].
@@ -47,12 +48,19 @@ GeoScheduleServer >> login: aRequest [
 
 	user := schedule userWithEmail: email.
 	user ifNil: [ ^ GeoNoCapabilities new scheduleObject ].
-	user password = password ifFalse: [ 
-		^ GeoNoCapabilities new scheduleObject ].
+	user password = password ifFalse: [ ^ GeoNoCapabilities new scheduleObject ].
 	session := aRequest session.
 	session attributeAt: 'user' put: user id.
 
 	^ (self userCapabiltiesForUser: user) scheduleObject
+]
+
+{ #category : #'accessing requests' }
+GeoScheduleServer >> logout: aRequest [
+
+	aRequest session removeAttribute: 'user'.
+
+	^ GeoNoCapabilities new scheduleObject
 ]
 
 { #category : #'accessing requests' }
