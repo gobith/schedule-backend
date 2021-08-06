@@ -11,6 +11,11 @@ GeoNoCapabilities >> events [
 ]
 
 { #category : #accessing }
+GeoNoCapabilities >> userId [ 
+	^nil
+]
+
+{ #category : #accessing }
 GeoNoCapabilities >> users [
 
 	^#()

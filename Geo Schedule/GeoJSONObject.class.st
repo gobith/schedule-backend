@@ -92,6 +92,12 @@ GeoJSONObject >> user: aString [
 ]
 
 { #category : #accessing }
+GeoJSONObject >> userId: userId [
+
+	self at: 'userId' put: userId
+]
+
+{ #category : #accessing }
 GeoJSONObject >> userStatus: aString [ 
 	self at: 'userStatus' put: aString
 ]

@@ -39,7 +39,14 @@ GeoCapabilities >> scheduleObject [
 	^ self newJSONObject
 		  events: self events;
 		  users: self users;
+		  userId: self userId;
 		  yourself
+]
+
+{ #category : #accessing }
+GeoCapabilities >> userId [ 
+
+	^user id
 ]
 
 { #category : #accessing }
