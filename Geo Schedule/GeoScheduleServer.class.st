@@ -24,7 +24,8 @@ GeoScheduleServer >> addRoutes [
 	teapot PUT: '/schedule/category/add' -> [ :request | self addCategory: request ].
 	teapot PUT: '/schedule/category/modify' -> [ :request | self modifyCategory: request ].
 	teapot PUT: '/schedule/user/add' -> [ :request | self addUser: request ].
-	teapot PUT: '/schedule/user/modify' -> [ :request | self modifyUser: request ]
+	teapot PUT: '/schedule/user/modify' -> [ :request | self modifyUser: request ].
+	teapot GET: '/schedule/years' -> [ :request | self requestYears:  request ]
 	
 ]
 
