@@ -42,6 +42,7 @@ GeoUserCapabilities >> userObjectFor: aUser [
 		  id: aUser id;
 		  name: aUser name;
 		  surname: aUser surname;
+		  showInSchedule: aUser showInSchedule;
 		  yourself
 ]
 

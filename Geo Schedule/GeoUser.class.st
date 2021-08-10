@@ -172,6 +172,12 @@ GeoUser >> role: anObject [
 	role := anObject
 ]
 
+{ #category : #testing }
+GeoUser >> showInSchedule [
+
+	^self isArchived not
+]
+
 { #category : #accessing }
 GeoUser >> surname [
 
