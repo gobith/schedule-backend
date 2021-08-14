@@ -5,6 +5,28 @@ Class {
 }
 
 { #category : #accessing }
+GeoAdminCapabilities >> categories [
+
+	^ (schedule categories asSortedCollection: [ :catA :catB | 
+		   catA name <= catB name ]) collect: [ :category | 
+		  self categoryObjectFor: category ]
+]
+
+{ #category : #accessing }
+GeoAdminCapabilities >> categoryObjectFor: category [
+
+	^ GeoJSONObject new
+		  id: category id;
+		  name: category name;
+		  description: category description;
+		  statusPermissions: (GeoJSONObject new
+				   event: #( 'open' 'closed' 'finished' 'archived' );
+				   user: #( 'confirmedScheduling' 'iCan' 'iCanNot' 'neutral' 'scheduled' );
+				   yourself);
+		  yourself
+]
+
+{ #category : #accessing }
 GeoAdminCapabilities >> eventObjectFor: event [
 
 	^ self newJSONObject

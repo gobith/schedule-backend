@@ -15,6 +15,11 @@ GeoCapabilities class >> schedule: aSchedule user: aUser [
 ]
 
 { #category : #accessing }
+GeoCapabilities >> categories [ 
+	^self subclassResponsibility 
+]
+
+{ #category : #accessing }
 GeoCapabilities >> events [
 
 	^self subclassResponsibility 
@@ -40,6 +45,7 @@ GeoCapabilities >> scheduleObject [
 		  events: self events;
 		  users: self users;
 		  userId: self userId;
+		  categories: self categories;
 		  yourself
 ]
 

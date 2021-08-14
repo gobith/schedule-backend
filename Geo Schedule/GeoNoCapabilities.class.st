@@ -11,6 +11,12 @@ GeoNoCapabilities >> events [
 ]
 
 { #category : #accessing }
+GeoNoCapabilities >> statusPermission [
+
+	^#()
+]
+
+{ #category : #accessing }
 GeoNoCapabilities >> userId [ 
 	^nil
 ]

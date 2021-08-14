@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+GeoJSONObject >> categories: aCollection [ 
+	
+	self at: 'categories' put: aCollection
+]
+
+{ #category : #accessing }
 GeoJSONObject >> category: aString [ 
 	self at: 'category' put: aString
 ]
@@ -27,6 +33,12 @@ GeoJSONObject >> description: aString [
 { #category : #accessing }
 GeoJSONObject >> email: aString [ 
 	self at: 'email' put: aString
+]
+
+{ #category : #accessing }
+GeoJSONObject >> event: anObject [
+
+	self at: 'event' put: anObject
 ]
 
 { #category : #accessing }
@@ -84,6 +96,11 @@ GeoJSONObject >> showInSchedule: aBoolean [
 { #category : #accessing }
 GeoJSONObject >> status: aString [ 
 	self at: 'status' put: aString
+]
+
+{ #category : #accessing }
+GeoJSONObject >> statusPermissions: anObject [ 
+	self at: 'statusPermissions' put: anObject
 ]
 
 { #category : #accessing }
