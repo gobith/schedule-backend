@@ -56,12 +56,28 @@ GeoAdminCapabilities >> events [
 { #category : #'accessing requests' }
 GeoAdminCapabilities >> modifyUser: aRequest [
 
-	| dict |
+	| dict usr |
 	dict := NeoJSONReader fromString: aRequest contents.
 
-	user := schedule modifyUser: dict.
-	
-	^self userObjectFor: user
+	usr := schedule modifyUser: dict.
+
+	^ self userObjectFor: usr
+]
+
+{ #category : #'accessing requests' }
+GeoAdminCapabilities >> updateUserEventStatus: aRequest [
+
+	| dict userEventStatus |
+	self halt.
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	userEventStatus := schedule updateUserEventStatus: dict.
+
+	^ GeoJSONObject new
+		  user: userEventStatus user id;
+		  event: userEventStatus event id;
+		  status: userEventStatus status;
+		  yourself
 ]
 
 { #category : #accessing }

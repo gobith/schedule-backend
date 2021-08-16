@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+GeoNoCapabilities >> categories [ 
+	^#()
+]
+
+{ #category : #accessing }
 GeoNoCapabilities >> events [
 
 	^#()
