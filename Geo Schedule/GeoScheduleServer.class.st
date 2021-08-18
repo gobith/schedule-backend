@@ -11,7 +11,8 @@ Class {
 { #category : #'accessing requests' }
 GeoScheduleServer >> addCategory: aRequest [
 
-	self halt
+		^ (self userCapabiltiesForUser: (self sessionUserFor: aRequest))
+		  addCategory: aRequest
 ]
 
 { #category : #accessing }

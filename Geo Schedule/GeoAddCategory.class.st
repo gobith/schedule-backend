@@ -13,7 +13,8 @@ GeoAddCategory >> addTo: aSchedule [
 		id: (payload at: 'id');
 		name: (payload at: 'name');
 		description: (payload at: 'description').
-	aSchedule categories at: category id put: category
+	aSchedule categories at: category id put: category.
+	^category 
 ]
 
 { #category : #actions }

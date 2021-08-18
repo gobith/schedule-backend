@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #accessing }
+GeoAdminCapabilities >> addCategory: aRequest [
+
+	| dict category |
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	category := schedule addCategory:  dict.
+
+	^ self categoryObjectFor: category
+]
+
+{ #category : #accessing }
 GeoAdminCapabilities >> categories [
 
 	^ (schedule categories asSortedCollection: [ :catA :catB | 
@@ -68,7 +79,7 @@ GeoAdminCapabilities >> modifyUser: aRequest [
 GeoAdminCapabilities >> updateUserEventStatus: aRequest [
 
 	| dict userEventStatus |
-	self halt.
+
 	dict := NeoJSONReader fromString: aRequest contents.
 
 	userEventStatus := schedule updateUserEventStatus: dict.
