@@ -26,6 +26,11 @@ GeoCapabilities >> events [
 ]
 
 { #category : #accessing }
+GeoCapabilities >> loggedIn [ 
+	^true
+]
+
+{ #category : #accessing }
 GeoCapabilities >> newJSONObject [
 
 	^GeoJSONObject new
@@ -46,6 +51,7 @@ GeoCapabilities >> scheduleObject [
 		  users: self users;
 		  userId: self userId;
 		  categories: self categories;
+		  loggedIn: self loggedIn;
 		  yourself
 ]
 

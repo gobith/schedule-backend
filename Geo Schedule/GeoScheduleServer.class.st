@@ -15,6 +15,13 @@ GeoScheduleServer >> addCategory: aRequest [
 		  addCategory: aRequest
 ]
 
+{ #category : #'accessing requests' }
+GeoScheduleServer >> addEvent: aRequest [
+
+	^ (self userCapabiltiesForUser: (self sessionUserFor: aRequest)) 
+		  addEvent: aRequest
+]
+
 { #category : #accessing }
 GeoScheduleServer >> addRoutes [
 
@@ -26,6 +33,8 @@ GeoScheduleServer >> addRoutes [
 	teapot PUT: '/schedule/category/modify' -> [ :request | self modifyCategory: request ].
 	teapot PUT: '/schedule/user/add' -> [ :request | self addUser: request ].
 	teapot PUT: '/schedule/user/modify' -> [ :request | self modifyUser: request ].
+	teapot PUT: '/schedule/event/add' -> [ :request | self addEvent: request ].
+	teapot PUT: '/schedule/event/modify' -> [ :request | self modifyEvent: request ].
 	teapot PUT: '/schedule/update-user-event-status' -> [ :request | self updateUserEventStatus:  request ].
 	teapot GET: '/schedule/years' -> [ :request | self requestYears:  request ]
 	
@@ -70,6 +79,13 @@ GeoScheduleServer >> logout: aRequest [
 GeoScheduleServer >> modifyCategory: aRequest [
 
 	self halt
+]
+
+{ #category : #'accessing requests' }
+GeoScheduleServer >> modifyEvent: aRequest [
+
+	^ (self userCapabiltiesForUser: (self sessionUserFor: aRequest)) 
+		  modifyEvent: aRequest
 ]
 
 { #category : #'accessing requests' }

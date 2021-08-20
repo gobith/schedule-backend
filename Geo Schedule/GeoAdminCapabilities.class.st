@@ -16,6 +16,18 @@ GeoAdminCapabilities >> addCategory: aRequest [
 ]
 
 { #category : #accessing }
+GeoAdminCapabilities >> addEvent: aRequest [
+
+	| dict event |
+	self halt.
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	event := schedule addEvent:  dict.
+
+	^ self eventObjectFor: event
+]
+
+{ #category : #accessing }
 GeoAdminCapabilities >> categories [
 
 	^ (schedule categories asSortedCollection: [ :catA :catB | 

@@ -57,6 +57,11 @@ GeoJSONObject >> location: aString [
 ]
 
 { #category : #accessing }
+GeoJSONObject >> loggedIn: aBoolean [ 
+	self at: 'loggedIn' put: aBoolean
+]
+
+{ #category : #accessing }
 GeoJSONObject >> name: aString [ 
 	self at: 'name' put: aString
 ]

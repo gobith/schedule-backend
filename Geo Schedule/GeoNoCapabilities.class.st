@@ -16,6 +16,11 @@ GeoNoCapabilities >> events [
 ]
 
 { #category : #accessing }
+GeoNoCapabilities >> loggedIn [ 
+	^false
+]
+
+{ #category : #accessing }
 GeoNoCapabilities >> statusPermission [
 
 	^#()
