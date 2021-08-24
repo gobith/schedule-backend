@@ -27,7 +27,7 @@ GeoAdminCapabilities >> addEvent: aRequest [
 	date := Date fromString: dateString.
 	time := Time fromString: timeString.
 	dict at: 'dateAndTime' put: (DateAndTime date: date time: time) printString .
-	dict at: 'status' put: 'open'.
+	
 
 	event := schedule addEvent:  dict.
 
