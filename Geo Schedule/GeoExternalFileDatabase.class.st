@@ -42,6 +42,21 @@ GeoExternalFileDatabase >> nextId [
 ]
 
 { #category : #actions }
+GeoExternalFileDatabase >> removeLast: idx [
+
+	| entries newEntries |
+	entries := self fileContents substrings: Character null asString.
+	newEntries := entries asOrderedCollection.
+	newEntries removeLast: idx.
+
+	self fileReference delete.
+
+	newEntries do: [ :entry | self write: entry ]
+	
+
+]
+
+{ #category : #actions }
 GeoExternalFileDatabase >> write: aSTONString [	
 	
 	mutex

@@ -17,7 +17,8 @@ GeoAddEvent >> addTo: aSchedule [
 		category: (aSchedule categories at: (payload at: 'category'));
 		nrOfUsers: (payload at: 'nrOfUsers');
 		location: (payload at: 'location').
-	aSchedule events at: event id put: event
+	aSchedule events at: event id put: event.
+	^event
 ]
 
 { #category : #actions }

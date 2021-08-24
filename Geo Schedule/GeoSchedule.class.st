@@ -20,7 +20,7 @@ GeoSchedule >> addCategory: aDictionary [
 { #category : #actions }
 GeoSchedule >> addEvent: aDictionary [
 
-	GeoAddEvent fromPayload: aDictionary schedule: self
+	^GeoAddEvent fromPayload: aDictionary schedule: self
 ]
 
 { #category : #actions }
@@ -106,6 +106,12 @@ GeoSchedule >> modifyUser: aDictionary [
 GeoSchedule >> nextId [
 
 	^database nextId
+]
+
+{ #category : #actions }
+GeoSchedule >> removeLastDBEntry: idx [
+
+	database removeLast: idx
 ]
 
 { #category : #accessing }
