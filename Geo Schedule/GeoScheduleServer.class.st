@@ -43,7 +43,8 @@ GeoScheduleServer >> addRoutes [
 { #category : #'accessing requests' }
 GeoScheduleServer >> addUser: aRequest [
 
-	self halt
+	^ (self userCapabiltiesForUser: (self sessionUserFor: aRequest)) 
+		  addUser: aRequest
 ]
 
 { #category : #'accessing requests' }

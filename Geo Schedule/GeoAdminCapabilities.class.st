@@ -35,6 +35,33 @@ GeoAdminCapabilities >> addEvent: aRequest [
 ]
 
 { #category : #accessing }
+GeoAdminCapabilities >> addUser: aRequest [
+
+	| dict |
+
+	self halt.
+
+	dict := NeoJSONReader fromString: aRequest contents.
+
+
+	"| dict event dateString timeString date time |
+
+
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	dateString := dict at: 'dateString'.
+	timeString := dict at: 'timeString'.
+	date := Date fromString: dateString.
+	time := Time fromString: timeString.
+	dict at: 'dateAndTime' put: (DateAndTime date: date time: time) printString .
+	
+
+	event := schedule addEvent:  dict.
+
+	^ self eventObjectFor: event"
+]
+
+{ #category : #accessing }
 GeoAdminCapabilities >> categories [
 
 	^ (schedule categories asSortedCollection: [ :catA :catB | 
