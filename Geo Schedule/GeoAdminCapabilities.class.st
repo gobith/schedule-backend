@@ -39,26 +39,17 @@ GeoAdminCapabilities >> addUser: aRequest [
 
 	| dict |
 
-	self halt.
-
 	dict := NeoJSONReader fromString: aRequest contents.
+	dict at: 'password' put: '1234'.
 
+	user := schedule addUser: dict.
 
-	"| dict event dateString timeString date time |
+	(dict at: 'categoryIdStatus') do: [ :catStatDict | 
+		catStatDict at: 'user' put: user id.
+		(catStatDict at: 'status') ifNotEmpty: [ 
+			schedule updateUserCategoryStatus: catStatDict ] ].
 
-
-	dict := NeoJSONReader fromString: aRequest contents.
-
-	dateString := dict at: 'dateString'.
-	timeString := dict at: 'timeString'.
-	date := Date fromString: dateString.
-	time := Time fromString: timeString.
-	dict at: 'dateAndTime' put: (DateAndTime date: date time: time) printString .
-	
-
-	event := schedule addEvent:  dict.
-
-	^ self eventObjectFor: event"
+	^ self userObjectFor: user
 ]
 
 { #category : #accessing }
