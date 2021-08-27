@@ -4,6 +4,12 @@ Class {
 	#category : #'Geo Schedule-Capabilities'
 }
 
+{ #category : #actions }
+GeoNoCapabilities >> addEvent: aRequest [
+
+	^nil
+]
+
 { #category : #accessing }
 GeoNoCapabilities >> categories [ 
 	^#()
@@ -18,6 +24,12 @@ GeoNoCapabilities >> events [
 { #category : #accessing }
 GeoNoCapabilities >> loggedIn [ 
 	^false
+]
+
+{ #category : #actions }
+GeoNoCapabilities >> modifyCategory: aRequest [
+
+	^nil
 ]
 
 { #category : #accessing }

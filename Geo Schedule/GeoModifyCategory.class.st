@@ -12,4 +12,5 @@ GeoModifyCategory >> addTo: aSchedule [
 	category
 		name: (payload at: 'name');
 		description: (payload at: 'description').
+	^ category
 ]
