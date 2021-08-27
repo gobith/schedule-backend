@@ -4,7 +4,7 @@ Class {
 	#category : #'Geo Schedule-Capabilities'
 }
 
-{ #category : #accessing }
+{ #category : #actions }
 GeoAdminCapabilities >> addCategory: aRequest [
 
 	| dict category |
@@ -15,26 +15,30 @@ GeoAdminCapabilities >> addCategory: aRequest [
 	^ self categoryObjectFor: category
 ]
 
-{ #category : #accessing }
-GeoAdminCapabilities >> addEvent: aRequest [
+{ #category : #actions }
+GeoAdminCapabilities >> addDateAndTimeTo: dict [
 
-	| dict event dateString timeString date time |
-
-	dict := NeoJSONReader fromString: aRequest contents.
-
+	| timeString dateString time date |
 	dateString := dict at: 'dateString'.
 	timeString := dict at: 'timeString'.
 	date := Date fromString: dateString.
 	time := Time fromString: timeString.
-	dict at: 'dateAndTime' put: (DateAndTime date: date time: time) printString .
-	
+	dict
+		at: 'dateAndTime'
+		put: (DateAndTime date: date time: time) printString
+]
 
-	event := schedule addEvent:  dict.
+{ #category : #actions }
+GeoAdminCapabilities >> addEvent: aRequest [
 
+	| dict event |
+	dict := NeoJSONReader fromString: aRequest contents.
+	self addDateAndTimeTo: dict.
+	event := schedule addEvent: dict.
 	^ self eventObjectFor: event
 ]
 
-{ #category : #accessing }
+{ #category : #actions }
 GeoAdminCapabilities >> addUser: aRequest [
 
 	| dict |
@@ -101,7 +105,7 @@ GeoAdminCapabilities >> events [
 			collect: [ :event | self eventObjectFor: event ]
 ]
 
-{ #category : #accessing }
+{ #category : #actions }
 GeoAdminCapabilities >> modifyCategory: aRequest [
 
 	| dict category |
@@ -112,7 +116,19 @@ GeoAdminCapabilities >> modifyCategory: aRequest [
 	^ self categoryObjectFor: category
 ]
 
-{ #category : #'accessing requests' }
+{ #category : #actions }
+GeoAdminCapabilities >> modifyEvent: aRequest [
+
+	| dict event |
+	dict := NeoJSONReader fromString: aRequest contents.
+	self addDateAndTimeTo: dict.
+
+	event := schedule modifyEvent:  dict.
+
+	^ self eventObjectFor: event
+]
+
+{ #category : #actions }
 GeoAdminCapabilities >> modifyUser: aRequest [
 
 	| dict usr |
@@ -123,7 +139,7 @@ GeoAdminCapabilities >> modifyUser: aRequest [
 	^ self userObjectFor: usr
 ]
 
-{ #category : #'accessing requests' }
+{ #category : #actions }
 GeoAdminCapabilities >> updateUserEventStatus: aRequest [
 
 	| dict userEventStatus |

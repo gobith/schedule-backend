@@ -93,7 +93,7 @@ GeoSchedule >> modifyCategory: aDictionary [
 { #category : #actions }
 GeoSchedule >> modifyEvent: aDictionary [
 
-	GeoModifyEvent fromPayload: aDictionary schedule: self
+	^GeoModifyEvent fromPayload: aDictionary schedule: self
 ]
 
 { #category : #actions }
