@@ -87,7 +87,7 @@ GeoSchedule >> modDateAndTime [
 { #category : #actions }
 GeoSchedule >> modifyCategory: aDictionary [
 
-	GeoModifyCategory fromPayload: aDictionary schedule: self
+	^GeoModifyCategory fromPayload: aDictionary schedule: self
 ]
 
 { #category : #actions }

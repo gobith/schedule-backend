@@ -79,7 +79,8 @@ GeoScheduleServer >> logout: aRequest [
 { #category : #'accessing requests' }
 GeoScheduleServer >> modifyCategory: aRequest [
 
-	self halt
+	^ (self userCapabiltiesForUser: (self sessionUserFor: aRequest))
+		  modifyCategory: aRequest
 ]
 
 { #category : #'accessing requests' }

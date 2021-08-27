@@ -101,6 +101,17 @@ GeoAdminCapabilities >> events [
 			collect: [ :event | self eventObjectFor: event ]
 ]
 
+{ #category : #accessing }
+GeoAdminCapabilities >> modifyCategory: aRequest [
+
+	| dict category |
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	category := schedule modifyCategory:  dict.
+
+	^ self categoryObjectFor: category
+]
+
 { #category : #'accessing requests' }
 GeoAdminCapabilities >> modifyUser: aRequest [
 
