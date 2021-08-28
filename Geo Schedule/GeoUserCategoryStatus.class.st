@@ -27,6 +27,12 @@ GeoUserCategoryStatus >> category: anObject [
 	category := anObject
 ]
 
+{ #category : #testing }
+GeoUserCategoryStatus >> isAdmin [
+
+	^status = 'admin'
+]
+
 { #category : #printing }
 GeoUserCategoryStatus >> printOn: aStream [
 

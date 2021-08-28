@@ -100,6 +100,11 @@ GeoAdminCapabilities >> events [
 			collect: [ :event | self eventObjectFor: event ]
 ]
 
+{ #category : #testing }
+GeoAdminCapabilities >> isAdmin [ 
+	^true
+]
+
 { #category : #actions }
 GeoAdminCapabilities >> modifyCategory: aRequest [
 

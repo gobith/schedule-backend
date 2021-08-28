@@ -8,9 +8,33 @@ Class {
 GeoUserCapabilities >> categories [
 
 	^ ((user categoryStatus select: [ :catStat | catStat canView ]) 
-		   collect: [ :catStat | catStat category ]) asSortedCollection: [ 
-		  :a 
-		  :b | a name <= b name ]
+		   collect: [ :catStat | self categoryObjectFor: catStat category ]) 
+		  asSortedCollection: [ :a :b | a <= b ]
+]
+
+{ #category : #accessing }
+GeoUserCapabilities >> categoryObjectFor: category [
+
+	| statusPermissions |
+	statusPermissions := (user isAdminFor: category)
+		                     ifTrue: [ 
+			                     GeoJSONObject new
+				                     event: #( 'open' 'closed' 'finished' 'archived' );
+				                     user:  #( 'confirmedScheduling' 'iCan' 'iCanNot' 'neutral' 'scheduled' );
+				                     yourself ]
+		                     ifFalse: [ 
+			                     GeoJSONObject new
+				                     event: #(  );
+				                     user: #( 'iCan' 'iCanNot' 'neutral' );
+				                     yourself ].
+
+
+	^ GeoJSONObject new
+		  id: category id;
+		  name: category name;
+		  description: category description;
+		  statusPermissions: statusPermissions;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -47,11 +71,18 @@ GeoUserCapabilities >> events [
 { #category : #accessing }
 GeoUserCapabilities >> userObjectFor: aUser [
 
+	
 	^ self newJSONObject
 		  id: aUser id;
 		  name: aUser name;
 		  surname: aUser surname;
-		  showInSchedule: aUser showInSchedule;
+		  categoryStatus:
+			  ((aUser categoryStatus asOrderedCollection select: [ :catStat | 
+					    user canViewCategory: catStat category ]) collect: [ :each | 
+					   self newJSONObject
+						   category: each category id;
+						   status: each status;
+						   yourself ]);
 		  yourself
 ]
 

@@ -52,6 +52,12 @@ GeoJSONObject >> id: aString [
 ]
 
 { #category : #accessing }
+GeoJSONObject >> isAdmin: aBoolean [ 
+	
+	self at: 'isAdmin' put: aBoolean
+]
+
+{ #category : #accessing }
 GeoJSONObject >> location: aString [ 
 	self at: 'location' put: aString
 ]

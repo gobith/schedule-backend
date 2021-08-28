@@ -113,6 +113,18 @@ GeoUser >> isAdmin [
 ]
 
 { #category : #testing }
+GeoUser >> isAdminFor: aCategory [
+
+	| catStatus  |
+	catStatus := categoryStatus
+		           detect: [ :catStat | catStat category = aCategory ]
+		           ifNone: [ nil ].
+	catStatus ifNil: [ ^ false ].
+
+	^ catStatus isAdmin
+]
+
+{ #category : #testing }
 GeoUser >> isArchived [
 	^role = 'archive' 
 ]

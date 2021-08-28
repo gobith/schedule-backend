@@ -31,6 +31,11 @@ GeoCapabilities >> events [
 	^self subclassResponsibility 
 ]
 
+{ #category : #testing }
+GeoCapabilities >> isAdmin [ 
+	^false
+]
+
 { #category : #accessing }
 GeoCapabilities >> loggedIn [ 
 	^true
@@ -64,6 +69,7 @@ GeoCapabilities >> scheduleObject [
 		  userId: self userId;
 		  categories: self categories;
 		  loggedIn: self loggedIn;
+		  isAdmin: self isAdmin;
 		  yourself
 ]
 
