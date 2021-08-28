@@ -68,6 +68,12 @@ GeoJSONObject >> loggedIn: aBoolean [
 ]
 
 { #category : #accessing }
+GeoJSONObject >> name [
+
+	^self at: 'name'
+]
+
+{ #category : #accessing }
 GeoJSONObject >> name: aString [ 
 	self at: 'name' put: aString
 ]

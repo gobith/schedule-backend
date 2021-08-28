@@ -56,6 +56,12 @@ GeoSchedule >> database: anObject [
 ]
 
 { #category : #accessing }
+GeoSchedule >> eventAt: eventId [
+
+	^events at: eventId ifAbsent: nil
+]
+
+{ #category : #accessing }
 GeoSchedule >> events [
 
 	^ events

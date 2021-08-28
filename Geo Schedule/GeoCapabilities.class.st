@@ -47,6 +47,12 @@ GeoCapabilities >> modifyCategory: aRequest [
 	^nil
 ]
 
+{ #category : #actions }
+GeoCapabilities >> modifyUser: aRequest [
+
+	^nil
+]
+
 { #category : #accessing }
 GeoCapabilities >> newJSONObject [
 

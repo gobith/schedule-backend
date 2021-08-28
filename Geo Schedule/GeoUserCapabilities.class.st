@@ -9,7 +9,7 @@ GeoUserCapabilities >> categories [
 
 	^ ((user categoryStatus select: [ :catStat | catStat canView ]) 
 		   collect: [ :catStat | self categoryObjectFor: catStat category ]) 
-		  asSortedCollection: [ :a :b | a <= b ]
+		  asSortedCollection: [ :a :b | a name <= b name ]
 ]
 
 { #category : #accessing }
@@ -66,6 +66,27 @@ GeoUserCapabilities >> events [
 		          user canViewEvent: event ].
 
 	^ events collect: [ :event | self eventObjectFor: event ]
+]
+
+{ #category : #actions }
+GeoUserCapabilities >> updateUserEventStatus: aRequest [
+
+	| dict eventUser userEventStatus event |
+	dict := NeoJSONReader fromString: aRequest contents.
+
+	eventUser := schedule userAt: (dict at: 'user').
+	event := schedule eventAt: (dict at: 'event').
+
+	(user canUpdateUserEventStatusForUser: eventUser event: event) 
+		ifFalse: [ ^ nil ].
+
+	userEventStatus := schedule updateUserEventStatus: dict.
+
+	^ GeoJSONObject new
+		  user: userEventStatus user id;
+		  event: userEventStatus event id;
+		  status: userEventStatus status;
+		  yourself
 ]
 
 { #category : #accessing }

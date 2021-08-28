@@ -17,6 +17,25 @@ Class {
 }
 
 { #category : #testing }
+GeoUser >> canUpdateUserEventStatusForUser: aUser event: anEvent [
+
+	| category catStatus |
+	self isAdmin ifTrue: [ ^ true ].
+	
+	self = aUser ifTrue: [ ^true ].
+
+	category := anEvent category.
+
+	catStatus := categoryStatus
+		           detect: [ :catStat | catStat category = category ]
+		           ifNone: nil.
+
+	catStatus ifNil: [ ^ false ].
+	
+	^catStatus isAdmin
+]
+
+{ #category : #testing }
 GeoUser >> canViewCategory: aGeoCategory [
 
 	self isActive ifFalse: [ ^false ].
