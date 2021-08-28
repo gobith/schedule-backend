@@ -93,12 +93,8 @@ GeoScheduleServer >> modifyEvent: aRequest [
 { #category : #'accessing requests' }
 GeoScheduleServer >> modifyUser: aRequest [
 
-	| capabilities |
-	capabilities := GeoAdminCapabilities
-		                schedule: schedule
-		                user: (schedule userNamed: 'Georges Kerssies').
-
-	^ capabilities modifyUser: aRequest
+	^ (self userCapabiltiesForUser: (self sessionUserFor: aRequest)) 
+		  modifyUser: aRequest
 ]
 
 { #category : #accessing }

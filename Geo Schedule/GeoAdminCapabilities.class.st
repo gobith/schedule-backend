@@ -41,19 +41,14 @@ GeoAdminCapabilities >> addEvent: aRequest [
 { #category : #actions }
 GeoAdminCapabilities >> addUser: aRequest [
 
-	| dict |
-
+	| dict newUser |
 	dict := NeoJSONReader fromString: aRequest contents.
 	dict at: 'password' put: '1234'.
 
-	user := schedule addUser: dict.
+	newUser := schedule addUser: dict.
+	self updateUserCategoryStatusFor: dict user: newUser.
 
-	(dict at: 'categoryIdStatus') do: [ :catStatDict | 
-		catStatDict at: 'user' put: user id.
-		(catStatDict at: 'status') ifNotEmpty: [ 
-			schedule updateUserCategoryStatus: catStatDict ] ].
-
-	^ self userObjectFor: user
+	^ self userObjectFor: newUser
 ]
 
 { #category : #accessing }
@@ -131,12 +126,22 @@ GeoAdminCapabilities >> modifyEvent: aRequest [
 { #category : #actions }
 GeoAdminCapabilities >> modifyUser: aRequest [
 
-	| dict usr |
+	| dict newUser |
 	dict := NeoJSONReader fromString: aRequest contents.
+	
+	newUser := schedule modifyUser: dict.
+	self updateUserCategoryStatusFor: dict user: newUser.
 
-	usr := schedule modifyUser: dict.
+	^ self userObjectFor: newUser
+]
 
-	^ self userObjectFor: usr
+{ #category : #actions }
+GeoAdminCapabilities >> updateUserCategoryStatusFor: dict user: newUser [
+
+	(dict at: 'categoryIdStatus') do: [ :catStatDict | 
+		catStatDict at: 'user' put: newUser id.
+		(catStatDict at: 'status') ifNotEmpty: [ 
+			schedule updateUserCategoryStatus: catStatDict ] ]
 ]
 
 { #category : #actions }
