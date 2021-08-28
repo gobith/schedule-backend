@@ -14,6 +14,12 @@ GeoCapabilities class >> schedule: aSchedule user: aUser [
 	^self new schedule: aSchedule user: aUser
 ]
 
+{ #category : #actions }
+GeoCapabilities >> addEvent: aRequest [
+
+	^nil
+]
+
 { #category : #accessing }
 GeoCapabilities >> categories [ 
 	^self subclassResponsibility 
@@ -28,6 +34,12 @@ GeoCapabilities >> events [
 { #category : #accessing }
 GeoCapabilities >> loggedIn [ 
 	^true
+]
+
+{ #category : #actions }
+GeoCapabilities >> modifyCategory: aRequest [
+
+	^nil
 ]
 
 { #category : #accessing }

@@ -94,11 +94,6 @@ GeoJSONObject >> role: aString [
 ]
 
 { #category : #accessing }
-GeoJSONObject >> showInSchedule: aBoolean [ 
-	self at: 'showInSchedule' put: aBoolean 
-]
-
-{ #category : #accessing }
 GeoJSONObject >> status: aString [ 
 	self at: 'status' put: aString
 ]

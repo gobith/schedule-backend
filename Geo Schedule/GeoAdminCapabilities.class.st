@@ -171,7 +171,6 @@ GeoAdminCapabilities >> userObjectFor: aUser [
 		  phone: aUser phone;
 		  role: aUser role;
 		  websiteRole: aUser websiteRole;
-		  showInSchedule: aUser showInSchedule;
 		  categoryStatus:
 			  (aUser categoryStatus asOrderedCollection collect: [ :each | 
 					   self newJSONObject

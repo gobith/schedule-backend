@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #accessing }
+GeoUserCapabilities >> categories [
+
+	^ ((user categoryStatus select: [ :catStat | catStat canView ]) 
+		   collect: [ :catStat | catStat category ]) asSortedCollection: [ 
+		  :a 
+		  :b | a name <= b name ]
+]
+
+{ #category : #accessing }
 GeoUserCapabilities >> eventObjectFor: event [
 
 	^ self newJSONObject
